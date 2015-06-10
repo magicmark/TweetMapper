@@ -51,3 +51,10 @@ build/Release
 # Dependency directory
 # https://docs.npmjs.com/misc/faq#should-i-check-my-node-modules-folder-into-git
 node_modules
+
+# yo
+node_modules
+dist
+.tmp
+.sass-cache
+bower_components

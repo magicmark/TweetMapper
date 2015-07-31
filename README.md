@@ -1,10 +1,16 @@
-Hudl-Technical-Test
+TweetMapper
 ===================
 
-> Hudl Technical Test
+> TweetMapper
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.11.1.
+Finds tweets based on your location!
+
+# Screenshots
+
+![Entering Location](http://i.imgur.com/DzGhgcd.png)
+![Showing Tweets](http://i.imgur.com/UnGWJUf.jpg)
+
+# Yo Stuff
 
 ## Build & development
 

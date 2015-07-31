@@ -2,19 +2,19 @@
 
 /**
  * @ngdoc service
- * @name hudlApp.geocoder
+ * @name tweetMapper.geocoder
  * @description
  * # geocoder
- * Service in the hudlApp.
+ * Service in the tweetMapper.
  */
-angular.module('hudlApp')
+angular.module('tweetMapper')
 
 .service('geocoder',
   [ '$q', '$http',
   function ($q, $http) {
 
     var baseUrl = 'https://api.opencagedata.com/geocode/v1/', 
-        apiKey  = 'cd27cb065f219b2c4b44d6cf86f17c59';
+        apiKey  = 'KEYHERE';
         
     /**
      * Get the API endpoint for a specified location

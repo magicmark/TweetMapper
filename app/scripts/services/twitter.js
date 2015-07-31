@@ -2,17 +2,17 @@
 
 /**
  * @ngdoc service
- * @name hudlApp.twitter
+ * @name tweetMapper.twitter
  * @description
  * # twitter
- * Service in the hudlApp.
+ * Service in the tweetMapper.
  */
-angular.module('hudlApp')
+angular.module('tweetMapper')
 .service('twitter',
   [ '$q', '$http',
   function ($q, $http) {
 
-    var baseUrl  = 'http://hudltest.larah.me:3000';
+    var baseUrl  = 'https://example.com/tweets';
 
     /**
      * Get the twitter API endpoint for the specified location
@@ -21,7 +21,7 @@ angular.module('hudlApp')
      * @return {String} - the API Url
      */
     function getAPIEndpoint (_geocode_) {
-      var geocodeString = _geocode_.lat + ',' + _geocode_.lng + ';1km';
+      var geocodeString = _geocode_.lat + ',' + _geocode_.lng + ',5km';
       return baseUrl + '/' + encodeURI(geocodeString);
     }
 
@@ -41,7 +41,6 @@ angular.module('hudlApp')
         // Make the API Request
         $http.get(getAPIEndpoint(_geocode_))
         .success(function (data, status, headers, config) {
-          console.log("got data - " + data);
           deferred.resolve(data);
         })
         .error(function (data, status, headers, config) {

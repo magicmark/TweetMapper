@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name hudlApp
+ * @name tweetMapper
  * @description
- * # hudlApp
+ * # tweetMapper
  *
  * Main module of the application.
  */
 angular
-  .module('hudlApp', [
+  .module('tweetMapper', [
     'ngAnimate',
     'ngCookies',
     'ngResource',

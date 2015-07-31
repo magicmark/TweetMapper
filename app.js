@@ -4,7 +4,7 @@ var request = require('request');
 var app = express();
 
 var baseUrl     = 'https://api.twitter.com/1.1/search/tweets.json';
-var accessToken = 'AAAAAAAAAAAAAAAAAAAAAAGJgAAAAAAAzq%2FIAvzm%2BoAaGBsJgl3Uu%2BAW4yE%3D2FXU1BPN2qcNEEN3sMugKr1o2OsmCJVpPOFnwecp2dobNqIxHa';
+var accessToken = 'TOKENHERE';
 
 app.get('/', function (req, res) {
   res.send('Hello World!');

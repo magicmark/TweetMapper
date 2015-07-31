@@ -3,7 +3,7 @@
 describe('Service: twitter', function () {
 
   // load the service's module
-  beforeEach(module('hudlApp'));
+  beforeEach(module('tweetMapper'));
 
   // instantiate service
   var twitter;

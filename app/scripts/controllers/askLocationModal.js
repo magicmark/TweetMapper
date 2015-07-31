@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name hudlApp.controller:AboutCtrl
+ * @name tweetMapper.controller:AboutCtrl
  * @description
  * # AboutCtrl
- * Controller of the hudlApp
+ * Controller of the tweetMapper
  */
-angular.module('hudlApp')
+angular.module('tweetMapper')
 
 .controller('AskLocationModalCtrl',
   [ '$scope', '$modalInstance', 'randomPlace',

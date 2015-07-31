@@ -2,18 +2,19 @@
 
 /**
  * @ngdoc function
- * @name hudlApp.controller:MainCtrl
+ * @name tweetMapper.controller:MainCtrl
  * @description
  * # MainCtrl
- * Controller of the hudlApp
+ * Controller of the tweetMapper
  */
-angular.module('hudlApp')
+angular.module('tweetMapper')
 
 .controller('MainCtrl',
-  [ '$scope', '$modal', '$window', 'geocoder', 'twitter',
-  function ($scope, $modal, $window, geocoder, twitter) {
+  [ '$scope', '$modal', '$window', 'geocoder', 'twitter', '$timeout', '$document',
+  function ($scope, $modal, $window, geocoder, twitter, $timeout, $document) {
 
-    var randomPlaces;
+    var randomPlaces,
+        currentPlace;
 
     /**
      * A list of places to be potentially shown to users
@@ -64,6 +65,9 @@ angular.module('hudlApp')
       geocoder.getCoordinates(_location_)
       .then(function (place) {
 
+        // Save place
+        currentPlace = place;
+
         // Update message
         $scope.message = "Finding tweets for " + place.location;
         // Find the tweets
@@ -83,9 +87,85 @@ angular.module('hudlApp')
      */
     function findTweets (_coordinates_) {
       twitter.findTweets(_coordinates_).then(function (results) {
-        console.log(results);
+
+        // Update user
+        $scope.message = "Located tweets!";
+
+        // Filter out tweets with no geolocation
+        var filteredTweets = results.statuses.filter(function (tweet) {
+          return (tweet.geo && tweet.geo.type === 'Point')
+        });
+
+        displayTweets(filteredTweets);
+
+      }, function () {
+        $scope.message = "There was an error loading the tweets.";
       });
     }
+
+    /**
+     * Show the tweets on the map
+     * 
+     * @param  {Array} - array of tweets
+     * @return {undefined}
+     */
+    function displayTweets (_tweets_) {
+
+      // Clear tweets
+      $scope.tweets = { };
+
+      _tweets_.forEach(function (tweet) {
+
+        var message = [
+          '<div class="tweeter">',
+          '  <h4>' + tweet.user.screen_name + '</h4>',
+          '  <hr />',
+          '  <p>' + tweet.text + '</p>',
+          '</div>'
+        ].join('\n');
+
+        $scope.tweets['tweet' + tweet.id_str] = {
+          lat: tweet.geo.coordinates[0],
+          lon: tweet.geo.coordinates[1],
+          label: {
+            message: '<div class="tweetDiv' + tweet.id_str + '">' + message + '</div>',
+            show: false,
+            showOnMouseOver: true
+          }
+        };
+
+        // TODO: Properly embed tweet using twitter API. Because of the dynamics
+        // of how the library I'm using works, this is difficult.
+
+        /*
+        twttr.widgets.createTweet( 
+          tweet.id_str,
+          $window.document.getElementsByClassName('tweetDiv' + tweet.id_str)[0]
+        ).then( function( el ) {
+          console.log('Tweet added.');
+          $scope.$apply();
+        }).catch(function (err) {
+          console.log(err);
+        });
+        */
+       
+        $scope.mapCenter = {
+          lat: currentPlace.coordinates.lat,
+          lon: currentPlace.coordinates.lng,
+          zoom: 13
+        };
+
+        $scope.message = "Showing tweets around " + currentPlace.location;
+
+      });
+    
+
+    }
+
+    /**
+     * Dictionary of tweets to be shown
+     */
+    $scope.tweets = { };
 
     /**
      * The initial place to be shown on the map

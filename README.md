@@ -1,6 +1,8 @@
 TweetMapper
 ===================
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/magicmark/TweetMapper.svg)](https://greenkeeper.io/)
+
 > TweetMapper
 
 Finds tweets based on your location!
